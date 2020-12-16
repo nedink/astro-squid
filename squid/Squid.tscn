@@ -1,0 +1,55 @@
+[gd_scene load_steps=11 format=2]
+
+[ext_resource path="res://squid/squid.gd" type="Script" id=1]
+[ext_resource path="res://resources/squid1.png" type="Texture" id=2]
+[ext_resource path="res://resources/squid2.png" type="Texture" id=3]
+[ext_resource path="res://resources/squid_down1.png" type="Texture" id=4]
+[ext_resource path="res://resources/squid_up1.png" type="Texture" id=5]
+[ext_resource path="res://resources/squid_down2.png" type="Texture" id=6]
+[ext_resource path="res://resources/squid_up2.png" type="Texture" id=7]
+[ext_resource path="res://squid/BasicShot.tscn" type="PackedScene" id=8]
+
+[sub_resource type="SpriteFrames" id=1]
+animations = [ {
+"frames": [ ExtResource( 3 ), ExtResource( 2 ) ],
+"loop": true,
+"name": "default",
+"speed": 2.0
+}, {
+"frames": [ ExtResource( 5 ), ExtResource( 7 ) ],
+"loop": true,
+"name": "up",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 4 ), ExtResource( 6 ) ],
+"loop": true,
+"name": "down",
+"speed": 5.0
+} ]
+
+[sub_resource type="CapsuleShape2D" id=2]
+radius = 5.99996
+height = 24.0001
+
+[node name="Squid" type="KinematicBody2D"]
+script = ExtResource( 1 )
+shot = ExtResource( 8 )
+
+[node name="AnimatedSprite" type="AnimatedSprite" parent="."]
+position = Vector2( 0, -1 )
+frames = SubResource( 1 )
+animation = "up"
+frame = 1
+playing = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2( 17, 0 )
+rotation = 1.5708
+shape = SubResource( 2 )
+
+[node name="Shooter" type="Position2D" parent="."]
+position = Vector2( 41, 0 )
+
+[node name="CooldownTimer" type="Timer" parent="Shooter"]
+wait_time = 0.5
+one_shot = true
