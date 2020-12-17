@@ -1,8 +1,9 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://audio/astrosquid_level.wav" type="AudioStream" id=1]
 [ext_resource path="res://level.gd" type="Script" id=2]
 [ext_resource path="res://resources/starfield.png" type="Texture" id=3]
+[ext_resource path="res://Asteroid.tscn" type="PackedScene" id=4]
 
 [node name="Level" type="Node2D"]
 script = ExtResource( 2 )
@@ -11,10 +12,158 @@ script = ExtResource( 2 )
 stream = ExtResource( 1 )
 autoplay = true
 
-[node name="TextureRect" type="TextureRect" parent="."]
+[node name="ParallaxBackground" type="ParallaxBackground" parent="."]
+
+[node name="ParallaxLayer" type="ParallaxLayer" parent="ParallaxBackground"]
+motion_scale = Vector2( 0.33, 1 )
+__meta__ = {
+"_edit_group_": true,
+"_edit_lock_": true
+}
+
+[node name="TextureRect" type="TextureRect" parent="ParallaxBackground/ParallaxLayer"]
 margin_right = 1028.0
 margin_bottom = 384.0
 texture = ExtResource( 3 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="TextureRect2" type="TextureRect" parent="ParallaxBackground/ParallaxLayer"]
+margin_left = 1024.0
+margin_right = 2052.0
+margin_bottom = 384.0
+texture = ExtResource( 3 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TextureRect3" type="TextureRect" parent="ParallaxBackground/ParallaxLayer"]
+margin_left = 2048.0
+margin_right = 3076.0
+margin_bottom = 384.0
+texture = ExtResource( 3 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TextureRect4" type="TextureRect" parent="ParallaxBackground/ParallaxLayer"]
+margin_left = 3072.0
+margin_right = 4100.0
+margin_bottom = 384.0
+texture = ExtResource( 3 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TextureRect5" type="TextureRect" parent="ParallaxBackground/ParallaxLayer"]
+margin_left = 4096.0
+margin_right = 5124.0
+margin_bottom = 384.0
+texture = ExtResource( 3 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Asteroid2" parent="." instance=ExtResource( 4 )]
+position = Vector2( 992, 152 )
+
+[node name="Asteroid3" parent="." instance=ExtResource( 4 )]
+position = Vector2( 776, 80 )
+size = 1
+
+[node name="Asteroid19" parent="." instance=ExtResource( 4 )]
+position = Vector2( 840, 104 )
+size = 1
+
+[node name="Asteroid24" parent="." instance=ExtResource( 4 )]
+position = Vector2( 584, 136 )
+size = 1
+
+[node name="Asteroid25" parent="." instance=ExtResource( 4 )]
+position = Vector2( 720, 272 )
+size = 1
+
+[node name="Asteroid5" parent="." instance=ExtResource( 4 )]
+position = Vector2( 880, 328 )
+size = 1
+
+[node name="Asteroid6" parent="." instance=ExtResource( 4 )]
+position = Vector2( 792, 320 )
+size = 1
+
+[node name="Asteroid7" parent="." instance=ExtResource( 4 )]
+position = Vector2( 944, 280 )
+size = 1
+
+[node name="Asteroid20" parent="." instance=ExtResource( 4 )]
+position = Vector2( 1184, 320 )
+size = 1
+
+[node name="Asteroid21" parent="." instance=ExtResource( 4 )]
+position = Vector2( 1216, 312 )
+size = 1
+
+[node name="Asteroid22" parent="." instance=ExtResource( 4 )]
+position = Vector2( 1624, 256 )
+size = 1
+
+[node name="Asteroid23" parent="." instance=ExtResource( 4 )]
+position = Vector2( 1640, 288 )
+size = 1
+
+[node name="Asteroid8" parent="." instance=ExtResource( 4 )]
+position = Vector2( 888, 232 )
+size = 1
+
+[node name="Asteroid9" parent="." instance=ExtResource( 4 )]
+position = Vector2( 1320, 256 )
+
+[node name="Asteroid10" parent="." instance=ExtResource( 4 )]
+position = Vector2( 1376, 232 )
+
+[node name="Asteroid11" parent="." instance=ExtResource( 4 )]
+position = Vector2( 1408, 264 )
+size = 1
+
+[node name="Asteroid12" parent="." instance=ExtResource( 4 )]
+position = Vector2( 1336, 120 )
+size = 1
+
+[node name="Asteroid26" parent="." instance=ExtResource( 4 )]
+position = Vector2( 1192, 88 )
+size = 1
+
+[node name="Asteroid27" parent="." instance=ExtResource( 4 )]
+position = Vector2( 1144, 120 )
+size = 1
+
+[node name="Asteroid28" parent="." instance=ExtResource( 4 )]
+position = Vector2( 1200, 192 )
+size = 1
+
+[node name="Asteroid29" parent="." instance=ExtResource( 4 )]
+position = Vector2( 1208, 208 )
+size = 1
+
+[node name="Asteroid17" parent="." instance=ExtResource( 4 )]
+position = Vector2( 1456, 296 )
+size = 1
+
+[node name="Asteroid13" parent="." instance=ExtResource( 4 )]
+position = Vector2( 1656, 208 )
+size = 1
+
+[node name="Asteroid14" parent="." instance=ExtResource( 4 )]
+position = Vector2( 1672, 104 )
+size = 1
+
+[node name="Asteroid15" parent="." instance=ExtResource( 4 )]
+position = Vector2( 1752, 336 )
+size = 1
+
+[node name="Asteroid16" parent="." instance=ExtResource( 4 )]
+position = Vector2( 1576, 152 )
+
+[node name="Asteroid18" parent="." instance=ExtResource( 4 )]
+position = Vector2( 1704, 320 )

@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/squid1.png-ff40bcd095128aba31c5ab9271ddf78f.stex"
+path="res://.import/squid2.png-9eb7f88892754a598cf9c177ec637f83.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://resources/squid1.png"
-dest_files=[ "res://.import/squid1.png-ff40bcd095128aba31c5ab9271ddf78f.stex" ]
+source_file="res://resources/squid/squid2.png"
+dest_files=[ "res://.import/squid2.png-9eb7f88892754a598cf9c177ec637f83.stex" ]
 
 [params]
 

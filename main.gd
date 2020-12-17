@@ -5,5 +5,7 @@ class_name Main
 func _process(delta):
 	if Input.is_action_just_pressed("cancel"):
 		get_tree().quit(0)
-		
+	
+	$Camera/Label.text = str(get_tree().get_node_count())
+	
 		

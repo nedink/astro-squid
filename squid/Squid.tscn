@@ -1,17 +1,19 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=14 format=2]
 
 [ext_resource path="res://squid/squid.gd" type="Script" id=1]
-[ext_resource path="res://resources/squid1.png" type="Texture" id=2]
-[ext_resource path="res://resources/squid2.png" type="Texture" id=3]
-[ext_resource path="res://resources/squid_down1.png" type="Texture" id=4]
-[ext_resource path="res://resources/squid_up1.png" type="Texture" id=5]
-[ext_resource path="res://resources/squid_down2.png" type="Texture" id=6]
-[ext_resource path="res://resources/squid_up2.png" type="Texture" id=7]
-[ext_resource path="res://squid/BasicShot.tscn" type="PackedScene" id=8]
+[ext_resource path="res://resources/squid/squid1.png" type="Texture" id=2]
+[ext_resource path="res://resources/squid/squid2.png" type="Texture" id=3]
+[ext_resource path="res://resources/squid/squid_down1.png" type="Texture" id=4]
+[ext_resource path="res://resources/squid/squid_up1.png" type="Texture" id=5]
+[ext_resource path="res://resources/squid/squid_down2.png" type="Texture" id=6]
+[ext_resource path="res://resources/squid/squid_up2.png" type="Texture" id=7]
+[ext_resource path="res://Health.tscn" type="PackedScene" id=8]
+[ext_resource path="res://resources/squid/squid3.png" type="Texture" id=9]
+[ext_resource path="res://squid/basic_shot_emitter.gd" type="Script" id=10]
 
 [sub_resource type="SpriteFrames" id=1]
 animations = [ {
-"frames": [ ExtResource( 3 ), ExtResource( 2 ) ],
+"frames": [ ExtResource( 3 ), ExtResource( 9 ), ExtResource( 2 ) ],
 "loop": true,
 "name": "default",
 "speed": 2.0
@@ -19,37 +21,77 @@ animations = [ {
 "frames": [ ExtResource( 5 ), ExtResource( 7 ) ],
 "loop": true,
 "name": "up",
-"speed": 5.0
+"speed": 2.0
 }, {
 "frames": [ ExtResource( 4 ), ExtResource( 6 ) ],
 "loop": true,
 "name": "down",
-"speed": 5.0
+"speed": 2.0
 } ]
 
 [sub_resource type="CapsuleShape2D" id=2]
-radius = 5.99996
-height = 24.0001
+radius = 6.99995
+height = 48.0001
+
+[sub_resource type="Animation" id=3]
+resource_name = "hit"
+length = 2.0
+tracks/0/type = "value"
+tracks/0/path = NodePath("AnimatedSprite:self_modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.2, 0.4, 0.6, 0.8, 1, 1.2, 1.4, 1.6, 1.8 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ) ]
+}
 
 [node name="Squid" type="KinematicBody2D"]
+collision_mask = 2
 script = ExtResource( 1 )
-shot = ExtResource( 8 )
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 position = Vector2( 0, -1 )
 frames = SubResource( 1 )
-animation = "up"
-frame = 1
+frame = 2
 playing = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2( 17, 0 )
+position = Vector2( 6, 0 )
 rotation = 1.5708
 shape = SubResource( 2 )
 
 [node name="Shooter" type="Position2D" parent="."]
-position = Vector2( 41, 0 )
+position = Vector2( 40, 0 )
 
-[node name="CooldownTimer" type="Timer" parent="Shooter"]
-wait_time = 0.5
+[node name="BasicShotEmitter" type="Node2D" parent="Shooter"]
+pause_mode = 1
+script = ExtResource( 10 )
+
+[node name="CooldownTimer" type="Timer" parent="Shooter/BasicShotEmitter"]
+wait_time = 0.3
 one_shot = true
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+playback_speed = 1.5
+anims/hit = SubResource( 3 )
+
+[node name="Label" type="Label" parent="."]
+visible = false
+margin_right = 40.0
+margin_bottom = 14.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="VisibilityNotifier2D" type="VisibilityNotifier2D" parent="."]
+position = Vector2( 20, 0 )
+rect = Rect2( -50, -10, 70, 20 )
+
+[node name="Health" parent="." instance=ExtResource( 8 )]
+hp = 4.0
+[connection signal="screen_exited" from="VisibilityNotifier2D" to="." method="_on_VisibilityNotifier2D_screen_exited"]
+[connection signal="died" from="Health" to="." method="die"]
