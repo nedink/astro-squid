@@ -55,24 +55,28 @@ func _physics_process(delta):
 		vel.x = min(0, vel.x)
 	if Input.is_action_pressed("left") and position.x - get_parent().get_node("Camera").position.x < 0:
 		vel.x = max(0, vel.x)
-	if Input.is_action_pressed("down") and position.y - get_parent().get_node("Camera").position.y > 348:
-		vel.y = min(0, vel.y)
-	if Input.is_action_pressed("up") and position.y - get_parent().get_node("Camera").position.y < 72:
-		vel.y = max(0, vel.y)
+#	if Input.is_action_pressed("down") and position.y - get_parent().get_node("Camera").position.y > 348:
+#		vel.y = min(0, vel.y)
+#	if Input.is_action_pressed("up") and position.y - get_parent().get_node("Camera").position.y < 72:
+#		vel.y = max(0, vel.y)
 #	position = Vector2(clamp(position.x, 0, 480), position.y)
 #	if (position + vel * delta > )
 	
-	var result:KinematicCollision2D = move_and_collide((vel + Vector2(40, 0)) * delta)
+	var result:KinematicCollision2D = move_and_collide((vel + Vector2(get_node("../Camera").scroll_speed, 0)) * delta)
 	
 	# resolve collision
 	if result:
 		if result.collider.collision_layer == 0:
-			vel = Vector2()
+			vel.y = 0
 		if result.collider.get_collision_layer_bit(1):
-			$AnimationPlayer.play("hit")
+			if not $AnimationPlayer.is_playing():
+				$AnimationPlayer.play("hit")
+				$Health.damage(1.0)
+				$Label.text = str(int($Label.text) + 1)
+				
 			vel = (vel.bounce(result.normal).normalized() * max_speed)
-			$Label.text = str(funcref($Health, "damage"))
-			$Health.damage(1.0)
+	
+	
 	
 
 
@@ -92,3 +96,5 @@ func die():
 	$Health.hp = 4
 	$AnimationPlayer.play("hit")
 
+func upgrade_weapon(weapon):
+	$Weapon.upgrade_weapon(weapon)

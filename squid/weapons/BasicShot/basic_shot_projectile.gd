@@ -1,6 +1,6 @@
 extends Area2D
 
-class_name BasicShot
+class_name BasicShotProjectile
 
 export var speed = 280
 
@@ -38,13 +38,12 @@ func _physics_process(delta):
 
 
 func hit(raycast:RayCast2D):
-	var point = raycast.get_collision_point()
-	# todo - hit marker here
 	var collider = raycast.get_collider()
 	if not collider.is_in_group("squid") and collider.has_node("Health"):
 		collider.get_node("Health").damage(1)
 	var impact = impact_scene.instance()
-	impact.position = position
+	impact.position = position + raycast.get_collision_point() - raycast.global_position
+	
 	get_tree().root.get_node("Main").add_child(impact)
 	queue_free()
 

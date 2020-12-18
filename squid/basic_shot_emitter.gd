@@ -9,7 +9,7 @@ func _physics_process(delta):
 	if Input.is_action_pressed("shoot") and $CooldownTimer.is_stopped():
 		# spawn bullet
 		var shot = shot_scene.instance()
-		shot.global_position = global_position
+		shot.global_position = global_position + Vector2(randf() * 8, 0)
 		shot.add_to_group("squid")
 		get_tree().root.get_node("Main").add_child(shot)
 		# spawn muzzle flare

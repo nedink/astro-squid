@@ -15,12 +15,12 @@ var rocksplosion_scene = preload("res://RockSplosion.tscn")
 
 func _ready():
 	if size == Size.SMALL:
-		$Health.hp = 5
+		$Health.hp = 4
 		$AnimatedSprite.frame = rand_range(1, 3)
 		$CollisionSmall.disabled = false
 		$CollisionLarge.disabled = true
 	if size == Size.LARGE:
-		$Health.hp = 15
+		$Health.hp = 12
 		$AnimatedSprite.frame = 0
 		$CollisionSmall.disabled = true
 		$CollisionLarge.disabled = false
@@ -48,9 +48,10 @@ func _on_Health_died():
 	var rocksplosion = rocksplosion_scene.instance()
 	rocksplosion.global_position = global_position
 	if size == Size.SMALL: 
+		rocksplosion.get_node("Particles2D").amount *= 0.5
 		rocksplosion.get_node("Particles2D").process_material = rocksplosion.get_node("Particles2D").process_material.duplicate()
-		rocksplosion.get_node("Particles2D").process_material.damping *= 1.2
-		rocksplosion.get_node("Particles2D").process_material.initial_velocity *= 0.8
+		rocksplosion.get_node("Particles2D").process_material.damping *= 2
+		rocksplosion.get_node("Particles2D").process_material.initial_velocity *= 0.5
 		rocksplosion.get_node("Particles2D").process_material.scale *= 0.7
 	get_tree().root.get_node("Main").add_child(rocksplosion)
 
@@ -69,3 +70,7 @@ func set_size(val):
 		$AnimatedSprite.frame = 0
 		$CollisionSmall.disabled = true
 		$CollisionLarge.disabled = false
+
+
+func damage(amt):
+	$Health.damage(amt)

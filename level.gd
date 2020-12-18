@@ -3,5 +3,5 @@ extends Node2D
 class_name Level
 
 
-func _ready():
-	$AudioStreamPlayer
+#func _ready():
+#	$AudioStreamPlayer
