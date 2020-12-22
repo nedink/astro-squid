@@ -4,7 +4,7 @@
 [ext_resource path="res://level.gd" type="Script" id=2]
 [ext_resource path="res://resources/starfield.png" type="Texture" id=3]
 [ext_resource path="res://Asteroid.tscn" type="PackedScene" id=4]
-[ext_resource path="res://power_up/LaserPowerUp.tscn" type="PackedScene" id=5]
+[ext_resource path="res://turret/basic/BasicTurret.tscn" type="PackedScene" id=5]
 
 [node name="Level" type="Node2D"]
 script = ExtResource( 2 )
@@ -24,50 +24,24 @@ __meta__ = {
 
 [node name="TextureRect" type="TextureRect" parent="ParallaxBackground/ParallaxLayer"]
 margin_right = 1028.0
-margin_bottom = 384.0
+margin_bottom = 302.0
 texture = ExtResource( 3 )
+stretch_mode = 3
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="TextureRect2" type="TextureRect" parent="ParallaxBackground/ParallaxLayer"]
-margin_left = 1024.0
-margin_right = 2052.0
-margin_bottom = 384.0
-texture = ExtResource( 3 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
+[node name="Ceiling" type="RayCast2D" parent="."]
+position = Vector2( 0, 56 )
+cast_to = Vector2( 2000, 0 )
 
-[node name="TextureRect3" type="TextureRect" parent="ParallaxBackground/ParallaxLayer"]
-margin_left = 2048.0
-margin_right = 3076.0
-margin_bottom = 384.0
-texture = ExtResource( 3 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="TextureRect4" type="TextureRect" parent="ParallaxBackground/ParallaxLayer"]
-margin_left = 3072.0
-margin_right = 4100.0
-margin_bottom = 384.0
-texture = ExtResource( 3 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="TextureRect5" type="TextureRect" parent="ParallaxBackground/ParallaxLayer"]
-margin_left = 4096.0
-margin_right = 5124.0
-margin_bottom = 384.0
-texture = ExtResource( 3 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
+[node name="Floor" type="RayCast2D" parent="."]
+position = Vector2( 0, 360 )
+cast_to = Vector2( 10000, 0 )
 
 [node name="Asteroid2" parent="." instance=ExtResource( 4 )]
-position = Vector2( 992, 152 )
+position = Vector2( 1032, 120 )
+size = 0
 
 [node name="Asteroid3" parent="." instance=ExtResource( 4 )]
 position = Vector2( 776, 80 )
@@ -98,30 +72,64 @@ position = Vector2( 944, 280 )
 size = 1
 
 [node name="Asteroid20" parent="." instance=ExtResource( 4 )]
-position = Vector2( 1184, 320 )
+position = Vector2( 1152, 272 )
+size = 1
+
+[node name="Asteroid46" parent="." instance=ExtResource( 4 )]
+position = Vector2( 1008, 288 )
+size = 1
+
+[node name="Asteroid47" parent="." instance=ExtResource( 4 )]
+position = Vector2( 1056, 296 )
+size = 1
+
+[node name="Asteroid48" parent="." instance=ExtResource( 4 )]
+position = Vector2( 1072, 336 )
 size = 1
 
 [node name="Asteroid21" parent="." instance=ExtResource( 4 )]
-position = Vector2( 1216, 312 )
+position = Vector2( 1184, 256 )
+size = 1
+
+[node name="Asteroid42" parent="." instance=ExtResource( 4 )]
+position = Vector2( 1160, 328 )
+size = 1
+
+[node name="Asteroid43" parent="." instance=ExtResource( 4 )]
+position = Vector2( 1208, 296 )
 size = 1
 
 [node name="Asteroid22" parent="." instance=ExtResource( 4 )]
-position = Vector2( 1624, 256 )
+position = Vector2( 1600, 336 )
+size = 1
+
+[node name="Asteroid45" parent="." instance=ExtResource( 4 )]
+position = Vector2( 1488, 232 )
 size = 1
 
 [node name="Asteroid23" parent="." instance=ExtResource( 4 )]
-position = Vector2( 1640, 288 )
+position = Vector2( 1640, 280 )
 size = 1
 
 [node name="Asteroid8" parent="." instance=ExtResource( 4 )]
-position = Vector2( 888, 232 )
+position = Vector2( 888, 224 )
+size = 1
+
+[node name="Asteroid30" parent="." instance=ExtResource( 4 )]
+position = Vector2( 904, 248 )
 size = 1
 
 [node name="Asteroid9" parent="." instance=ExtResource( 4 )]
-position = Vector2( 1320, 256 )
+position = Vector2( 1328, 288 )
+size = 0
 
 [node name="Asteroid10" parent="." instance=ExtResource( 4 )]
 position = Vector2( 1376, 232 )
+size = 0
+
+[node name="Asteroid31" parent="." instance=ExtResource( 4 )]
+position = Vector2( 1560, 288 )
+size = 0
 
 [node name="Asteroid11" parent="." instance=ExtResource( 4 )]
 position = Vector2( 1408, 264 )
@@ -140,11 +148,15 @@ position = Vector2( 1144, 120 )
 size = 1
 
 [node name="Asteroid28" parent="." instance=ExtResource( 4 )]
-position = Vector2( 1200, 192 )
+position = Vector2( 1168, 192 )
 size = 1
 
 [node name="Asteroid29" parent="." instance=ExtResource( 4 )]
-position = Vector2( 1208, 208 )
+position = Vector2( 1184, 216 )
+size = 1
+
+[node name="Asteroid44" parent="." instance=ExtResource( 4 )]
+position = Vector2( 1256, 160 )
 size = 1
 
 [node name="Asteroid17" parent="." instance=ExtResource( 4 )]
@@ -152,11 +164,43 @@ position = Vector2( 1456, 296 )
 size = 1
 
 [node name="Asteroid13" parent="." instance=ExtResource( 4 )]
-position = Vector2( 1656, 208 )
+position = Vector2( 1688, 168 )
 size = 1
 
 [node name="Asteroid14" parent="." instance=ExtResource( 4 )]
 position = Vector2( 1672, 104 )
+size = 1
+
+[node name="Asteroid34" parent="." instance=ExtResource( 4 )]
+position = Vector2( 1704, 128 )
+size = 1
+
+[node name="Asteroid35" parent="." instance=ExtResource( 4 )]
+position = Vector2( 1768, 96 )
+size = 1
+
+[node name="Asteroid36" parent="." instance=ExtResource( 4 )]
+position = Vector2( 1792, 104 )
+size = 1
+
+[node name="Asteroid37" parent="." instance=ExtResource( 4 )]
+position = Vector2( 1848, 72 )
+size = 1
+
+[node name="Asteroid38" parent="." instance=ExtResource( 4 )]
+position = Vector2( 1864, 288 )
+size = 1
+
+[node name="Asteroid39" parent="." instance=ExtResource( 4 )]
+position = Vector2( 1888, 296 )
+size = 1
+
+[node name="Asteroid40" parent="." instance=ExtResource( 4 )]
+position = Vector2( 1912, 160 )
+size = 1
+
+[node name="Asteroid41" parent="." instance=ExtResource( 4 )]
+position = Vector2( 1992, 200 )
 size = 1
 
 [node name="Asteroid15" parent="." instance=ExtResource( 4 )]
@@ -164,10 +208,21 @@ position = Vector2( 1752, 336 )
 size = 1
 
 [node name="Asteroid16" parent="." instance=ExtResource( 4 )]
-position = Vector2( 1576, 152 )
+position = Vector2( 1584, 120 )
+size = 0
 
 [node name="Asteroid18" parent="." instance=ExtResource( 4 )]
-position = Vector2( 1704, 320 )
+position = Vector2( 1784, 288 )
+size = 0
 
-[node name="PowerUp" parent="." instance=ExtResource( 5 )]
-position = Vector2( 184, 176 )
+[node name="Asteroid32" parent="." instance=ExtResource( 4 )]
+position = Vector2( 1864, 240 )
+size = 0
+
+[node name="BasicTurret" parent="." instance=ExtResource( 5 )]
+position = Vector2( 1587, 144 )
+rotation = 3.14159
+
+[node name="Asteroid33" parent="." instance=ExtResource( 4 )]
+position = Vector2( 2024, 264 )
+size = 0

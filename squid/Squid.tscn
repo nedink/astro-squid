@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=2]
+[gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://squid/squid.gd" type="Script" id=1]
 [ext_resource path="res://resources/squid/squid1.png" type="Texture" id=2]
@@ -9,8 +9,6 @@
 [ext_resource path="res://resources/squid/squid_up2.png" type="Texture" id=7]
 [ext_resource path="res://Health.tscn" type="PackedScene" id=8]
 [ext_resource path="res://resources/squid/squid3.png" type="Texture" id=9]
-[ext_resource path="res://squid/weapons/weapon.gd" type="Script" id=10]
-[ext_resource path="res://squid/weapons/laser/1.tscn" type="PackedScene" id=12]
 
 [sub_resource type="SpriteFrames" id=1]
 animations = [ {
@@ -58,19 +56,12 @@ speed_up = 15
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 position = Vector2( 0, -1 )
 frames = SubResource( 1 )
-frame = 2
 playing = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2( 6, 0 )
 rotation = 1.5708
 shape = SubResource( 2 )
-
-[node name="Weapon" type="Position2D" parent="."]
-position = Vector2( 42, 0 )
-script = ExtResource( 10 )
-
-[node name="Laser" parent="Weapon" instance=ExtResource( 12 )]
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 playback_speed = 1.5

@@ -4,8 +4,6 @@ class_name BasicShotProjectile
 
 export var speed = 280
 
-var impact_scene = preload("res://ShotImpact.tscn")
-
 
 func _ready():
 	if is_in_group("squid"):
@@ -41,7 +39,7 @@ func hit(raycast:RayCast2D):
 	var collider = raycast.get_collider()
 	if not collider.is_in_group("squid") and collider.has_node("Health"):
 		collider.get_node("Health").damage(1)
-	var impact = impact_scene.instance()
+	var impact = preload("res://ShotImpact.tscn").instance()
 	impact.position = position + raycast.get_collision_point() - raycast.global_position
 	
 	get_tree().root.get_node("Main").add_child(impact)

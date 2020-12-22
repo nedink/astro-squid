@@ -25,5 +25,6 @@ emitting = false
 amount = 1
 lifetime = 0.3
 one_shot = true
+speed_scale = 2.0
 process_material = SubResource( 3 )
 texture = ExtResource( 1 )

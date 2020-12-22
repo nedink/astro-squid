@@ -2,34 +2,42 @@ extends Node2D
 
 class_name Weapon
 
+#var weapons = {
+#	"BasicShot": [
+#		preload("res://squid/weapons/BasicShot/1.tscn"), 
+#		preload("res://squid/weapons/BasicShot/2.tscn")
+#	],
+#	"Laser": [
+#		preload("res://squid/weapons/laser/1.tscn"), 
+#		preload("res://squid/weapons/laser/2.tscn")
+#	]
+#}
 
-var weapons = {
-	"BasicShot": [
-		load("res://squid/weapons/basic_shot/1.tscn"), 
-		load("res://squid/weapons/basic_shot/2.tscn")
-	],
-	"Laser": [
-		load("res://squid/weapons/laser/1.tscn"), 
-		load("res://squid/weapons/laser/2.tscn")
-	]
-}
 
-export (String) var weapon setget set_weapon
-#export (PackedScene) var weapon_scene setget set_weapon
-
-func _ready():
-	set_weapon("BasicShot")
+func power_up(weaponType):
+	# switch
+	if get_child_count() == 0 or not get_child(0).weaponType == weaponType:
+		if get_child_count() > 0:
+			print(get_child(0).weaponType == weaponType)
+		for c in get_children(): 
+			c.queue_free()
+		var w = load("res://squid/weapons/" + weaponType + "/1.tscn").instance()
+		add_child(w)
+		return
+	# ++
+	if get_child(0).level < 3:
+		var w = load("res://squid/weapons/" + weaponType + "/" + str(get_child(0).level + 1) + ".tscn").instance()
+		get_child(0).queue_free()
+		add_child(w)
 
 
 func _physics_process(delta):
 	if Input.is_action_pressed("shoot"):
 		for c in get_children():
-			if c.has_method("shoot"):
-				c.shoot(delta)
+			c.shoot(delta)
 	else:
 		for c in get_children():
-			if c.has_method("no_shoot"):
-				c.no_shoot(delta)
+			c.no_shoot(delta)
 
 
 func shoot(delta):
@@ -38,25 +46,3 @@ func shoot(delta):
 func no_shoot(delta):
 	pass
 
-func set_weapon(type):
-	weapon = type
-	print(type)
-	# remove 
-#	remove_child(get_child(0))
-	# replace
-#	var w = weapon_scene.instance()
-#	add_child(w)
-
-func upgrade_weapon(w):
-	if w == weapon:
-		
-#		level += 1
-#		set_weapon(weapons.get(weapon_scene.get_class())[level])
-		# upgrade
-		pass
-	else:
-		# switch
-		pass
-		
-	# remove child if not instance of 
-	
