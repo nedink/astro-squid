@@ -2,21 +2,16 @@ extends KinematicBody2D
 
 class_name Squid
 
-
 export var speed_up = 10
 export var slow_down = 0.1
 export var max_speed = 150
 
-enum Weapon {
-	BASIC,
-	LAZER,
-	SLIME,
-	ZAPPP
-}
-export var weapon = Weapon.SLIME
 
 var vel = Vector2()
 var explosion_scene = preload("res://Explosion.tscn")
+
+signal died
+
 
 func _ready():
 	pass
@@ -95,6 +90,11 @@ func die():
 	# reset health
 	$Health.hp = 4
 	$AnimationPlayer.play("hit")
+	emit_signal("died")
 
 func upgrade_weapon(weapon):
 	$Weapon.upgrade_weapon(weapon)
+
+
+func _on_Lives_game_over():
+	queue_free()

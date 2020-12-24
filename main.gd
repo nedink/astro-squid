@@ -10,4 +10,7 @@ func _process(delta):
 	$Camera/Label.text += "FPS " + str(Engine.get_frames_per_second()) + "\n"
 	$Camera/Label.text += "NODES " + str(get_tree().get_node_count()) + "\n"
 	
-		
+
+
+func _on_Squid_died():
+	$AnimationPlayer.play("game_over")

@@ -1,4 +1,4 @@
-extends Node
+extends Node2D
 
 class_name Health
 
@@ -9,6 +9,9 @@ var explosion_scene = preload("res://Explosion.tscn")
 
 signal damaged
 signal died
+
+func _ready():
+	connect("died", get_tree().root.get_node("Main"), "explode", [global_position])
 
 func damage(amt):
 	if disabled:

@@ -29,6 +29,7 @@ func power_up(weaponType):
 		var w = load("res://squid/weapons/" + weaponType + "/" + str(get_child(0).level + 1) + ".tscn").instance()
 		get_child(0).queue_free()
 		add_child(w)
+		move_child(w, 0)
 
 
 func _physics_process(delta):

@@ -56,6 +56,7 @@ speed_up = 15
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 position = Vector2( 0, -1 )
 frames = SubResource( 1 )
+frame = 2
 playing = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]

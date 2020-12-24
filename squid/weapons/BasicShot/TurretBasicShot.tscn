@@ -8,22 +8,16 @@
 pause_mode = 1
 scale = Vector2( 1.5, 1 )
 script = ExtResource( 1 )
+speed_scale = 0.2
 
 [node name="CooldownTimer" type="Timer" parent="."]
-wait_time = 0.3
+wait_time = 2.0
 one_shot = true
 
 [node name="ShotEmitter" type="RayCast2D" parent="."]
-position = Vector2( 4, -4 )
-cast_to = Vector2( 1, 0 )
-script = ExtResource( 2 )
-
-[node name="ShotEmitter2" type="RayCast2D" parent="."]
-position = Vector2( 4, 4 )
+position = Vector2( 4, 0 )
 cast_to = Vector2( 1, 0 )
 script = ExtResource( 2 )
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 3 )
-volume_db = -15.0
-pitch_scale = 1.2

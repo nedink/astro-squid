@@ -9,18 +9,22 @@ func _ready():
 	if is_in_group("squid"):
 		collision_layer = 1
 		collision_mask = 2
-	if is_in_group("others"):
+		for c in get_children():
+			if "collision_mask" in c:
+				c.collision_mask = 2
+	else:
 		collision_layer = 2
 		collision_mask = 1
+		for c in get_children():
+			if "collision_mask" in c:
+				c.collision_mask = 1
 
 
 func _physics_process(delta):
-	
 	# get distance to next position
 	var displace = Vector2.RIGHT * speed * delta
 	$RayCast2DTop.cast_to = displace
 	$RayCast2DBot.cast_to = displace
-	
 	# check for collision (top + bottom)
 	if $RayCast2DTop.is_colliding():
 		hit($RayCast2DTop)
@@ -30,14 +34,14 @@ func _physics_process(delta):
 		return
 	else:
 		# move forward
-		position += displace
+		position += displace.rotated(rotation)
 	
 	
 
 
 func hit(raycast:RayCast2D):
 	var collider = raycast.get_collider()
-	if not collider.is_in_group("squid") and collider.has_node("Health"):
+	if collider.has_node("Health"):
 		collider.get_node("Health").damage(1)
 	var impact = preload("res://ShotImpact.tscn").instance()
 	impact.position = position + raycast.get_collision_point() - raycast.global_position

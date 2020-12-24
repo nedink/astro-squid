@@ -1,6 +1,7 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://explosion.gd" type="Script" id=1]
+[ext_resource path="res://audio/explode.wav" type="AudioStream" id=2]
 
 [sub_resource type="Curve" id=1]
 _data = [ Vector2( 0, 1 ), 0.0, 0.0, 0, 0, Vector2( 1, 0 ), -3.38313, 0.0, 0, 0 ]
@@ -39,4 +40,7 @@ process_material = SubResource( 3 )
 
 [node name="Timer" type="Timer" parent="."]
 wait_time = 4.0
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 2 )
 [connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]

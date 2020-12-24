@@ -1,10 +1,11 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://audio/level.wav" type="AudioStream" id=1]
 [ext_resource path="res://level.gd" type="Script" id=2]
 [ext_resource path="res://resources/starfield.png" type="Texture" id=3]
 [ext_resource path="res://Asteroid.tscn" type="PackedScene" id=4]
 [ext_resource path="res://turret/basic/BasicTurret.tscn" type="PackedScene" id=5]
+[ext_resource path="res://obstacle/RockObstacle.tscn" type="PackedScene" id=6]
 
 [node name="Level" type="Node2D"]
 script = ExtResource( 2 )
@@ -12,6 +13,8 @@ script = ExtResource( 2 )
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 1 )
 autoplay = true
+
+[node name="Tween" type="Tween" parent="."]
 
 [node name="ParallaxBackground" type="ParallaxBackground" parent="."]
 
@@ -31,6 +34,46 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
+[node name="TextureRect2" type="TextureRect" parent="ParallaxBackground/ParallaxLayer"]
+margin_left = 1024.0
+margin_right = 2052.0
+margin_bottom = 384.0
+texture = ExtResource( 3 )
+stretch_mode = 3
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TextureRect3" type="TextureRect" parent="ParallaxBackground/ParallaxLayer"]
+margin_left = 2048.0
+margin_right = 3076.0
+margin_bottom = 384.0
+texture = ExtResource( 3 )
+stretch_mode = 3
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TextureRect4" type="TextureRect" parent="ParallaxBackground/ParallaxLayer"]
+margin_left = 3072.0
+margin_right = 4100.0
+margin_bottom = 384.0
+texture = ExtResource( 3 )
+stretch_mode = 3
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TextureRect5" type="TextureRect" parent="ParallaxBackground/ParallaxLayer"]
+margin_left = 4096.0
+margin_right = 5124.0
+margin_bottom = 384.0
+texture = ExtResource( 3 )
+stretch_mode = 3
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
 [node name="Ceiling" type="RayCast2D" parent="."]
 position = Vector2( 0, 56 )
 cast_to = Vector2( 2000, 0 )
@@ -41,7 +84,6 @@ cast_to = Vector2( 10000, 0 )
 
 [node name="Asteroid2" parent="." instance=ExtResource( 4 )]
 position = Vector2( 1032, 120 )
-size = 0
 
 [node name="Asteroid3" parent="." instance=ExtResource( 4 )]
 position = Vector2( 776, 80 )
@@ -121,15 +163,12 @@ size = 1
 
 [node name="Asteroid9" parent="." instance=ExtResource( 4 )]
 position = Vector2( 1328, 288 )
-size = 0
 
 [node name="Asteroid10" parent="." instance=ExtResource( 4 )]
 position = Vector2( 1376, 232 )
-size = 0
 
 [node name="Asteroid31" parent="." instance=ExtResource( 4 )]
 position = Vector2( 1560, 288 )
-size = 0
 
 [node name="Asteroid11" parent="." instance=ExtResource( 4 )]
 position = Vector2( 1408, 264 )
@@ -209,20 +248,19 @@ size = 1
 
 [node name="Asteroid16" parent="." instance=ExtResource( 4 )]
 position = Vector2( 1584, 120 )
-size = 0
 
 [node name="Asteroid18" parent="." instance=ExtResource( 4 )]
 position = Vector2( 1784, 288 )
-size = 0
 
 [node name="Asteroid32" parent="." instance=ExtResource( 4 )]
 position = Vector2( 1864, 240 )
-size = 0
 
 [node name="BasicTurret" parent="." instance=ExtResource( 5 )]
-position = Vector2( 1587, 144 )
-rotation = 3.14159
+position = Vector2( 336, 104 )
+angle = 2.089
 
 [node name="Asteroid33" parent="." instance=ExtResource( 4 )]
 position = Vector2( 2024, 264 )
-size = 0
+
+[node name="Obstacle" parent="." instance=ExtResource( 6 )]
+position = Vector2( 462, 242 )

@@ -10,7 +10,7 @@ func _ready():
 	if is_in_group("squid"):
 		for e in get_children():
 			e.collision_mask = 2
-	if is_in_group("others"):
+	else:
 		for e in get_children():
 			e.collision_mask = 1
 
